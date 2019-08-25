@@ -1,0 +1,135 @@
+html {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	font-family:"Segoe UI", Arial, sans-serif;
+} 
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	background: url(../Media/background_3.jpg) center center fixed;
+	background-size: cover;
+	display: table;
+text-align:center;	
+}  
+
+.login {
+	padding: 3em;
+	transform: translateX(-50%) tanslateY(-50%);
+	margin: auto;
+	text-align:center;
+	font-family:"Segoe UI", Arial, sans-serif;	
+}
+
+@media screen and (min-width:700px) and (min-height: 700px){
+	.login {
+		position: absolute;
+		border: 1px  solid rgba(255,255,255,0.3);
+		border-radius: 5px;
+		top: 50%;
+		left: 50%;
+		max-height: 45%;
+		max-width: 30%;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+	h2{
+		font-size: 5vh;
+	}
+	p{
+		font-size: 2vh;
+	}	
+}
+
+@media screen and (max-width:700px) or (max-height: 700px){
+	.login {
+		position: absolute;
+		top: 10%;
+		left:0%;		
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+
+	}
+	h2{
+		font-size: 20px;
+	}
+	p{
+		font-size: 15px;
+	}	
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #ddd;
+  margin-bottom: 25px;
+}
+
+h2 {
+	margin-top: 0px;
+	font-weight: lighter;
+	color: #fff; 
+	text-align: center;	
+	margin-bottom: 25px;
+	font-family:"Segoe UI", Arial, sans-serif;
+}
+
+/*user input*/
+input {
+display: inline-block;	
+	display: run-in;
+	width: 320px;
+	height: 50px;
+	max-width: 80%;
+	max-height: 60%;
+	background: rgba(0,0,0,0.4);
+	border: 1px solid rgba(0,0,0,0.5);
+	font-family:"Segoe UI", Arial, sans-serif;
+	font-weight: lighter;
+	font-size: 100%;
+	margin-bottom: 20px;
+	padding-left: 10px;
+	border-radius: 5px;
+	color: white;
+}
+
+input:focus {
+	background: rgba(0,0,0,0.7);
+	outline: none;
+	color: white;
+}
+
+
+/*LOGIN button*/
+button {
+	width: 330px;
+	height: 50px;
+	max-width: 90%;
+	max-height: 60%;
+	font-size: 17px;
+	background: #000;
+	font-weight: lighter;
+	color: #fff;
+	border: 0px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	margin-top: 10px;	
+	opacity: 0.7;		
+	font-family:"Segoe UI", Arial, sans-serif;		
+}
+
+button:hover {
+	opacity: 1;
+}
+
+a {
+	color: white;
+	font-style: normal;
+}

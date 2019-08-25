@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/png" href="../Media/favicon.png" />
+		
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script> 
+		<!--<script src="../JS/statistics.js"></script>	-->	
+		<script src="../JS/global.js"></script>
+	</head>
+	
+	
+	<body onload = "getData()">
+		<script src = "../JS/req.js"></script>
+		<script src = "../JS/statistics.js"></script>
+	    <!-- Navbar -->
+		<link rel = "stylesheet" type = "text/css" href = "../CSS/global.css"/>
+		<nav>
+	        <ul>
+	            <div class="left">
+	                <li><a href="../index.html">About</a></li>
+	                <li><a href="statistics.html">Statistics</a></li>
+	                <li><a href="survey.html">Fill Survey</a></li>
+	            </div>
+	            <div class="right">
+				    <!--<div id="nav_loged">
+						<li><a href="#signout_popup" onclick="sign_out()">Sign Out</a></li>
+						<div class="hi_user"><li id = "hi_user">hi</li></div>
+					</div>
+					<div id="nav_not_loged">-->
+						<li><a href="signup.html">Sign Up</a></li>
+						<li><a href="login.html">Login</a></li>
+					</div>
+	            </div>
+	        </ul>
+	    </nav>
+
+		
+		<!-- Statistics -->
+		<link rel = "stylesheet" type = "text/css" href = "../CSS/statistics.css"/>
+		
+		<!-- Popup explanation -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+		<div class="container">
+		  <!-- Trigger the modal with a button -->
+		  <button type="button" id="btn-exp" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" >Open explanation</button>
+		  <!-- Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		  
+			<div class="modal-dialog">    
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">About the survey</h4>
+				</div>
+				<div class="modal-body">
+				  <p>These are the results of the survey.</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			  </div>			  
+			</div>
+		  </div>		  
+		</div>
+
+		<script>$(window).load(function(){
+				$('#myModal').modal('show');
+			});		
+		</script>
+		
+		
+		
+		
+		<!-- Making charts -->	
+		
+		<!--General-->
+		<h2>About the participants</h2>
+		<div class="table-responsive">
+			<canvas id="gen-chart" width="100" height="400"></canvas>
+		</div>	
+		<br/><br/>
+		<div id="canvas-wrapper"  style="position: relative">	
+			<canvas id="age-chart" width="400" height="400"></canvas>
+		</div>
+		<hr id="hr">
+		
+		<h2>Involvment in accidents</h2>
+		<div id="canvas-wrapper-mob"  style="position: relative;">	
+			<canvas id="mobileye-chart" width="100" height="400" ></canvas>
+		</div>
+		<br/><br/>
+		<div id="canvas-wrapper-age"  style="position: relative;">	
+			<canvas id="age-factor-chart" width="400" height="400" ></canvas>
+		</div>		
+		
+		<hr id="hr">
+		
+		<h2>Main factor</h2>
+		<div id="canvas-wrapper-avg"  style="position: relative">
+			<canvas id="avg-chart" width="400" height="600"></canvas>
+		</div>
+		<br/><br/>	
+
+		
+
+		
+		<!-- Building the charts using the data tat we get from the server -->
+		<script>
+		let xlables = [];
+		let ycounts = [];
+		
+		let xlables_gen = [];
+		let ycounts_gen = [];
+		
+		let xlables_mob = [];
+		let ycounts_mob = [];
+		
+		let xlables_age_fac = [];
+		let ycounts_age_fac = [];	
+
+		let xlables_avg = [];
+		let ycounts_avg = [];		
+		
+		/*chartIT_gender();
+		chartIT_age( data);
+		chartIT_mobileye();
+		chartIT_age_fac();
+		chartIT_avg();*/
+		
+		//gender chart
+		async function chartIT_gender( data) {
+			await getData_gender( data);				
+			
+
+			let ctx_gen = document.getElementById('gen-chart').getContext('2d');				
+			let gen_chart = new Chart(ctx_gen, {
+				type: 'pie',
+				data: {
+					labels: xlables_gen,
+					datasets: [{
+						label: "Population (millions)",
+						backgroundColor: ['rgb(176,176,176, 0.5)','rgb(244, 144, 128, 0.5)','rgb(214, 0, 128, 0.5)'],
+						data: ycounts_gen
+					}]
+				},
+				options: {
+					maintainAspectRatio	: false,
+					title: {
+						display: true,
+						text: "Gender",
+						fontSize:30,
+						fontStyle: "normal"
+					}
+				}
+			});
+		}
+
+		//age chart
+		async function chartIT_age( data) {
+			await getData_age( data);			
+			
+			var ctx = document.getElementById('age-chart').getContext('2d');
+			
+			var purple_orange_gradient = ctx.createLinearGradient(0, 0, 0, 600);
+			purple_orange_gradient.addColorStop(0, "#f49080");
+			purple_orange_gradient.addColorStop(1, 'purple');	
+			
+			var age_chart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: xlables,
+					datasets: [{
+						label: 'ages of participants',
+						data: ycounts,			
+						backgroundColor: purple_orange_gradient,
+						hoverBackgroundColor: purple_orange_gradient,
+						hoverBorderWidth: 2,
+						hoverBorderColor: 'purple',
+						borderWidth: 1
+					}]
+				},
+				options: {
+				    responsive: true,
+					maintainAspectRatio: false,
+					title: {
+						display:true,
+						text: "Ages",
+						fontSize:30,
+						fontStyle: "normal"
+					},
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				},				
+			});			
+
+		}		
+
+		//mobileye chart
+		async function chartIT_mobileye( data) {
+			await getData_mobileye( data);				
+			
+			let ctx_mob = document.getElementById('mobileye-chart').getContext('2d');				
+			let gen_chart = new Chart(ctx_mob, {
+				type: 'doughnut',
+				data: {
+					labels: xlables_mob,
+					datasets: [{
+						label: "Population (millions)",
+						backgroundColor: ["#3e95cd", "rgb(244, 144, 128, 0.5)"],
+						data: ycounts_mob
+					}]
+				},
+				options: {
+					maintainAspectRatio	: false,
+					title: {
+						display: true,
+						text: ["Percentage of people involved in car accidents","from those eho have a vehicle safety technology"],
+						fontSize:30,					
+						lineSpacing: 5,
+						fontStyle: "normal"
+					}
+				}
+			});
+		}
+		
+		//age factor chart
+		async function chartIT_age_fac( data) {
+			await getData_age_fac( data);
+			
+			let ctx_age_fac = document.getElementById("age-factor-chart").getContext('2d');
+			
+			var gradientStroke = ctx_age_fac.createLinearGradient(500, 0, 100, 0);
+			gradientStroke.addColorStop(0, "#3e95cd");
+			gradientStroke.addColorStop(1, "#f49080");
+			
+			let myChart = new Chart(ctx_age_fac, {
+				type: 'line',
+				data: {
+					labels: xlables_age_fac,
+						datasets: [{
+							label: '#accidents',
+							data: ycounts_age_fac,
+							pointHoverRadius: 10,
+							pointRadius: 5,
+							borderColor: gradientStroke,
+							pointBorderColor: gradientStroke,
+							pointHoverBorderColor: gradientStroke
+					}]
+				},
+				options: {  
+					maintainAspectRatio	: false,
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true							
+							}	
+						}]                
+					},
+					title: {
+					display: true,
+						text: ["Accidents - are impacted by age?"],
+						fontSize:30,					
+						lineSpacing: 5,
+						fontStyle: "normal"
+				  }
+				},
+			});
+		}
+
+		//factors average chart
+		async function chartIT_avg( data) {
+			await getData_avg( data);	
+			
+			let ctx_avg = document.getElementById("avg-chart").getContext('2d');
+			let avg_chart = new Chart(ctx_avg, {
+			type: 'polarArea',
+			data: {
+				labels: xlables_avg,
+				datasets: [{
+					label: "avg",
+					backgroundColor: [
+						'rgb(62, 149, 205,0.7)', 
+						'rgb(150, 0, 128,0.7)',
+						'rgb(176,176,176, 0.7)',
+						'rgb(232, 195, 185, 0.7)',
+						'rgb(196, 88, 80,0.7)'
+					],
+					data: ycounts_avg
+					}]
+				},
+				options: {
+				    responsive: true,
+					maintainAspectRatio: false,
+					title: {
+						display: true,
+						text: "On a scale from 1 to 5, here are the averages for accident factors",
+						fontSize:30,
+						fontStyle: "normal"
+					}
+				},
+			});
+		}
+		
+		
+		
+		
+		//These functions get data from server
+		
+		async function getData_gender( data) {
+				let gen_dict = {
+					"male": 0,
+					"female": 0,
+					"other":0
+				};			
+				//let data = ['40','70','7'];
+				let i = 1;
+				for(let key in gen_dict) {				
+					gen_dict[key] = data[i];
+					xlables_gen.push(key);
+					ycounts_gen.push(gen_dict[key]);
+					i++;
+				}
+		}
+			
+		async function getData_age( data) {
+			let age_dict = {
+				"0-17": 0,
+				"18-24": 0,
+				"25-34": 0,
+				"35-44": 0,
+				"45-54": 0,
+				"55-64": 0,
+				"65 or more": 0
+			};
+			
+			//let data = ['1','2','4','8','30','9','7'];
+			let i = 0;
+			for(let key in age_dict) {				
+				age_dict[key] = data[i];
+				xlables.push(key);
+				ycounts.push(age_dict[key]);
+				i++;
+			}
+		}
+		
+		async function getData_mobileye( data) {
+				let mob_dict = {
+					"have a vehicle safety technology": 0,
+					"involved in car accident": 0,
+				};			
+				//let data = ['150','30'];
+				let i = 0;
+				for(let key in mob_dict) {				
+					mob_dict[key] = data[i];
+					xlables_mob.push(key);
+					ycounts_mob.push(mob_dict[key]);
+					i++;
+				}
+		}
+
+		async function getData_age_fac( data) {console.log( data);
+				let age_fac_dict = {
+				"0-17": 0,
+				"18-24": 0,
+				"25-34": 0,
+				"35-44": 0,
+				"45-54": 0,
+				"55-64": 0,
+				"65 or more": 0
+				};		
+				//let data = ['1','40','4','8','30','9','16'];;
+				let i = 0;
+				for(let key in age_fac_dict) {				
+					age_fac_dict[key] = data[i];
+					xlables_age_fac.push(key);
+					ycounts_age_fac.push(age_fac_dict[key]);
+					i++;
+				}
+		}	
+
+		async function getData_avg( data) {
+			let avg_dict = {
+				"Tiredness": 0,
+				"Speeding": 0,
+				"Drunk driving": 0,
+				"Swerving": 0,
+				"Phone distraction": 0
+				};		
+				//let data = ['3','4.7','2','1','3'];
+				let i = 0;
+				for(let key in avg_dict) {				
+					avg_dict[key] = data[i];
+					xlables_avg.push(key);
+					ycounts_avg.push(avg_dict[key]);
+					i++;
+				}
+		}				
+
+		</script>
+	</body>
+</html>	

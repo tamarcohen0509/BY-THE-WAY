@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Sign Up</title>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/png" href="../Media/favicon.png" />
+		<!-- JS File -->
+	    <script src="../JS/global.js"></script>
+	</head>
+
+	<body>
+	    <!-- Navbar -->
+		<link rel = "stylesheet" type = "text/css" href = "../CSS/global.css"/>
+	    <nav>
+	        <ul>
+	            <div class="left">
+	                <li><a href="../index.html">About</a></li>
+	                <li><a href="statistics.html">Statistics</a></li>
+	                <li><a href="survey.html">Fill Survey</a></li>
+	            </div>
+	            <div class="right">
+				    <!--<div id="nav_loged">
+						<li><a href="#signout_popup" onclick="sign_out()">Sign Out</a></li>
+						<div class="hi_user"><li id = "hi_user">hi</li></div>
+					</div>
+					<div id="nav_not_loged">-->
+						<li><a href="signup.html">Sign Up</a></li>
+						<li><a href="login.html">Login</a></li>
+					</div>
+	            </div>
+	        </ul>
+	    </nav>
+		<script src = "../JS/req.js"></script>
+		<script src = "../JS/signup.js"></script>
+		<link rel = "stylesheet" type = "text/css" href = "../CSS/signup.css"/>
+		
+		<div class="signup">
+			<div>
+				<h1>SIGN UP</h1>
+				<p>Please fill in this form to create an account.</p>
+				<hr>
+				<label for="user-name" id="label"><b>Username</b></label><br>
+				<input type="text" id = "signup-name" name="user-name" placeholder="Enter Username" required>
+				<br>
+				<label for="psw"><b>Password (at least 9 characters)</b></label><br>
+				<input type="password" id = "signup-password" name="password" placeholder="Enter Password" required>
+				<br>
+				<label for="psw-repeat"><b>Repeat Password</b></label><br>
+				<input type="password" id = "repeat-password" name="psw-repeat" placeholder="Repeat Password"  required>
+				<br>
+				<button class="btn" onclick = "signup()">SIGN UP</button>
+				
+				<p class="login__signup">Have an account? &nbsp;<a id = "login-link" href="login.html">Log in</a></p>
+			</div>
+		</div>
+		
+	</body>
+</html>

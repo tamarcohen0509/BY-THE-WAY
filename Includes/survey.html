@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <title>Survey</title>
+      <meta name="description" content="Web Project ">
+      <meta name="author" content="Tamar Cohen & Sara Borowski">
+      <meta charset="utf-8" />
+      <!-- Stylesheet File -->
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Activate Bootstrap 4 Modals via JavaScript</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	  <link href="../CSS/global.css" rel="stylesheet">
+      <link href="../CSS/survey.css" rel="stylesheet">
+
+      <!-- JS File -->
+      <script src = "../JS/req.js"></script>
+      <script src = "../JS/survey.js"></script>
+      <!-- Favicon -->
+      <link rel="shortcut icon" type="image/png" href="../Media/favicon.png" />
+	<!--<script src="../JS/global.js"></script>-->
+   </head>
+   <body onload = "init()">
+	<!-- Navbar -->
+			<link rel = "stylesheet" type = "text/css" href = "../CSS/global.css"/>
+		    <nav>
+		        <ul>
+		            <div class="left">
+		                <li><a href="../index.html">About</a></li>
+		                <li><a href="statistics.html">Statistics</a></li>
+		                <li><a href="survey.html">Fill Survey</a></li>
+		            </div>
+		            <div class="right">
+					    	<!--<div id="nav_loged">
+							<li><a href="#signout_popup" onclick="sign_out()">Sign Out</a></li>
+							<div class="hi_user"><li id = "hi_user">hi</li></div>
+						</div>
+						<div id="nav_not_loged">-->
+							<li><a href="signup.html">Sign Up</a></li>
+							<li><a href="login.html">Login</a></li>
+						</div>
+		            </div>
+		        </ul>
+		    </nav>
+			
+			
+      <div class = "form" action="#popup_thanks" method="get" class="style-form">
+         <div class="header-text httal htvam">
+            <h1 class="form-header">
+               Market Research Survey
+            </h1>
+            <div class="form-subHeader">
+               Please take a few minutes to fill out this research survey
+            </div>
+         </div>
+		 <hr>
+         <label class="question"> Gender </label>
+         <label class="container"><input type="radio" name="gender" value="1" required>Male <span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="gender" value="2">Female <span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="gender" value="3">Other <span class="checkmark"></span></label>
+		
+         <label class="question"> Age </label>
+         <label class="container"><input type="radio" name="Age" value="0-18" required>0-17<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="Age" value="18-24">18-24<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="Age" value="25-34">25-34<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="Age" value="35-44">35-44<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="Age" value="45-54">45-54<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="Age" value="55-64">55-64<span class="checkmark"></span></label>
+		 <label class="container"><input type="radio" name="Age" value="65 or more">65 or more<span class="checkmark"></span></label>
+
+         <label class="question"> Do you have a car license? </label>
+         <label class="container"><input type="radio" name="license" value="1" required>Yes<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="license" value="0">No<span class="checkmark"></span></label>
+
+         <label class="question"> Do you have a car? </label>
+         <label class="container"><input type="radio" name="car" value="1" required>Yes<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="car" value="0">No<span class="checkmark"></span></label>
+
+         <label class="question"> Do you use a vehicle safety technology such as Mobileye?</label>
+         <label class="container"><input type="radio" name="technology" value="1" required>Yes<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="technology" value="0">No<span class="checkmark"></span></label> 
+
+         <label class="question"> Have you ever been involved in a car accident? </label>
+         <label class="container"><input type="radio" name="accident" value="1" required onclick="show_continuous_car_accident_questions()">Yes<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="accident" value="0" required onclick="hide_continuous_car_accident_questions()">No<span class="checkmark"></span></label>
+         
+		 <div id = "continuous_car_accident_questions">
+            <label class="question"> What do you think was the main cause of the car accident? </label>
+            <label class="container"><input type="radio" name="accident_cause" value="tiredness">Tiredness<span class="checkmark"></span></label>
+            <label class="container"><input type="radio" name="accident_cause" value="speeding">Speeding<span class="checkmark"></span></label>
+            <label class="container"><input type="radio" name="accident_cause" value="drunk_driving">Drunk driving<span class="checkmark"></span></label>
+            <label class="container"><input type="radio" name="accident_cause" value="swerving">Swerving<span class="checkmark"></span></label>
+            <label class="container"><input type="radio" name="accident_cause" value="phone distraction">Phone distraction<span class="checkmark"></span></label>
+            
+			<label class="question"> How severe was the accident? </label>
+            <label class="container"><input type="radio" name="accident_severe" value="Light">Light - just a few scratches<span class="checkmark"></span></label>
+            <label class="container"><input type="radio" name="accident_severe" value="Medium">Medium - the car needed to get fixed and/or the person needed to go to the hospital<span class="checkmark"></span></label>
+            <label class="container"><input type="radio" name="accident_severe" value="Critical">Critical - the car was totalled and/or the person was in critical condition<span class="checkmark"></span></label>
+      </div>
+         
+		 <label class="question"> Rate cause of car accidents from 1 to 5? </label>
+		 
+		 <label class="question"> Tiredness </label>
+		 <label class="container"><input type="radio" name="rate_tiredness" value="1" required>1<span class="checkmark"></span></label>
+		 <label class="container"><input type="radio" name="rate_tiredness" value="2" required>2<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_tiredness" value="3" required>3<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_tiredness" value="4" required>4<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_tiredness" value="5" required>5<span class="checkmark"></span></label>
+		 
+		 <label class="question"> Speeding </label>
+		 <label class="container"><input type="radio" name="rate_speeding" value="1" required>1<span class="checkmark"></span></label>
+		 <label class="container"><input type="radio" name="rate_speeding" value="2" required>2<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_speeding" value="3" required>3<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_speeding" value="4" required>4<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_speeding" value="5" required>5<span class="checkmark"></span></label>
+		 
+		 <label class="question"> Drunk driving </label>
+		 <label class="container"><input type="radio" name="rate_drunk" value="1" required>1<span class="checkmark"></span></label>
+		 <label class="container"><input type="radio" name="rate_drunk" value="2" required>2<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_drunk" value="3" required>3<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_drunk" value="4" required>4<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_drunk" value="5" required>5<span class="checkmark"></span></label>
+		 
+		 <label class="question"> Swerving </label>
+		 <label class="container"><input type="radio" name="rate_swerving" value="1" required>1<span class="checkmark"></span></label>
+		 <label class="container"><input type="radio" name="rate_swerving" value="2" required>2<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_swerving" value="3" required>3<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_swerving" value="4" required>4<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_swerving" value="5" required>5<span class="checkmark"></span></label>
+		 
+		 <label class="question"> Phone distraction </label>
+		 <label class="container"><input type="radio" name="rate_phone" value="1" required>1<span class="checkmark"></span></label>
+		 <label class="container"><input type="radio" name="rate_phone" value="2" required>2<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_phone" value="3" required>3<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_phone" value="4" required>4<span class="checkmark"></span></label>
+         <label class="container"><input type="radio" name="rate_phone" value="5" required>5<span class="checkmark"></span></label>
+		 
+   
+		<!--popup confirmation -->
+		<div class="popup-confirm">
+			<!-- Button HTML (to Trigger Modal) -->
+			<button type="button" class="col-md-4 text-center btn btn-outline-dark" data-toggle="modal" onclick = "insert()">Submit</button>
+
+			<!-- Modal HTML -->
+			<div id="myModal" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="true" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Confirmation</h5>							
+						</div>
+						<div class="modal-body">
+							<p>Thank you for filling out the survey!</p>                    
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.href='../index.html';">>Go to home page</button>
+							<button type="button" class="btn btn-primary" onclick="location.href='statistics.html';" value="Go to statistics page" >>Go to statistics page</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	  </div>  
+	  
+  
+   </body>
+</html>

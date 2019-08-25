@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Log In</title>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/png" href="../Media/favicon.png" />
+		<!-- JS File -->
+	    <script src="../JS/global.js"></script>
+	</head>
+
+	<body>
+	    <!-- Navbar -->
+		<link rel = "stylesheet" type = "text/css" href = "../CSS/global.css"/>
+	    <nav>
+	        <ul>
+	            <div class="left">
+	                <li><a href="../index.html">About</a></li>
+	                <li><a href="statistics.html">Statistics</a></li>
+	                <li><a href="survey.html">Fill Survey</a></li>
+	            </div>
+	            <div class="right">
+				    <!--<div id="nav_loged">
+						<li><a href="#signout_popup" onclick="sign_out()">Sign Out</a></li>
+						<div class="hi_user"><li id = "hi_user">hi</li></div>
+					</div>
+					<div id="nav_not_loged">-->
+						<li><a href="signup.html">Sign Up</a></li>
+						<li><a href="login.html">Login</a></li>
+					</div>
+	            </div>
+	        </ul>
+	    </nav>
+
+
+		<script src = "../JS/req.js"></script>
+		<!-- Login -->
+		<script src = "../JS/login.js"></script>
+		<link rel = "stylesheet" type = "text/css" href = "../CSS/login.css"/>
+		<div class="login">
+			<div>
+				<h2>Login to your account</h2>
+				<input type="text" id = "user-name" name="user-name" placeholder="Enter Username" required>
+				<br>
+				<input type="password" id = "password" name="password" placeholder="Enter Password" required>
+				<br>
+				<button class="btn" onclick = "login()">LOG IN</button>
+				<p class="login__signup">Don't have an account? &nbsp;<a id = "signup-link" href="signup.html">Sign up</a></p>
+			</div>
+		</div>		
+	</body>
+</html>
